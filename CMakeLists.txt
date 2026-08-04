@@ -18,6 +18,7 @@ file(GLOB_RECURSE SOURCE_FILES "src/*.cpp" "src/*.c")
 add_library(softloq-utf-8 ${LIBRARY_BUILD_TYPE} ${SOURCE_FILES})
 
 target_include_directories(softloq-utf-8 PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_precompile_headers(softloq-utf-8 PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include/softloq/utf-8/pch/pch.hpp")    
 
 # ==============================================================================
 # Tests
