@@ -1,10 +1,10 @@
 #include "softloq/utf-8/pch/pch.hpp"
-#include "softloq/utf-8/octet/multi-octet-sequence.hpp"
+#include "softloq/utf-8/octet/octet-sequence.hpp"
 
 namespace softloq::utf_8::octet
 {
 
-std::expected<std::size_t, Error> get_multi_octet_sequence_length(const Octet& first_octet) noexcept
+std::expected<std::size_t, Error> get_octet_sequence_length(const Octet& first_octet) noexcept
 {
     if (!first_octet.is_valid())
     {
