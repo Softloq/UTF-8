@@ -9,7 +9,7 @@ namespace softloq::utf_8::octet
 
 class Octet;
 
-class Error
+class Error final
 {
 public:
     enum class Code
@@ -17,16 +17,16 @@ public:
         InvalidOctet = 1
     };
 
-    static SOFTLOQ_UTF_8_API Error create_invalid_octet_error(const Octet& octet) noexcept;
+    [[nodiscard]] static SOFTLOQ_UTF_8_API Error create_invalid_octet_error(const Octet& octet) noexcept;
     
-    SOFTLOQ_UTF_8_API Code get_code() const noexcept;
-    SOFTLOQ_UTF_8_API const std::string& get_message() const noexcept;
+    [[nodiscard]] SOFTLOQ_UTF_8_API Code get_code() const noexcept;
+    [[nodiscard]] SOFTLOQ_UTF_8_API const std::string& get_message() const noexcept;
     
 private:
     Code code;
     std::string message;
 
-    SOFTLOQ_UTF_8_API Error(Code code, std::string message) noexcept;
+    [[nodiscard]] SOFTLOQ_UTF_8_API Error(Code code, std::string message) noexcept;
 };
 
 } // namespace softloq::utf_8::octet
