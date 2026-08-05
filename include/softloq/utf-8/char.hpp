@@ -22,6 +22,9 @@ public:
 
     [[nodiscard]] SOFTLOQ_UTF_8_API bool is_valid() const noexcept;
 
+    [[nodiscard]] SOFTLOQ_UTF_8_API bool is_bom() const noexcept;
+    [[nodiscard]] SOFTLOQ_UTF_8_API bool is_word_joiner() const noexcept;
+
 private:
     std::uint32_t code_point;
 

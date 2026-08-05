@@ -124,4 +124,8 @@ bool Char::is_valid() const noexcept
     return true;
 }
 
+bool Char::is_bom() const noexcept { return code_point == 0xFEFF; }
+
+bool Char::is_word_joiner() const noexcept { return code_point == 0x2060; }
+
 } // namespace softloq::utf_8

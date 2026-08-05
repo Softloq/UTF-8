@@ -23,6 +23,9 @@ public:
     [[nodiscard]] SOFTLOQ_UTF_8_API std::expected<std::size_t, Error> get_length() const noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API bool is_valid() const noexcept;
 
+    [[nodiscard]] SOFTLOQ_UTF_8_API bool is_bom() const noexcept;
+    [[nodiscard]] SOFTLOQ_UTF_8_API bool is_word_joiner() const noexcept;
+
 private:
     std::unique_ptr<Octet[]> octets;
 

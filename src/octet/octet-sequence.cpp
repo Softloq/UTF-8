@@ -87,6 +87,22 @@ bool OctetSequence::is_valid() const noexcept
     std::unreachable();
 }
 
+bool OctetSequence::is_bom() const noexcept
+{
+    const auto length_result = get_length();
+    if (!length_result || length_result.value() != 3) { return false; }
+
+    return octets[0].get_value() == 0xEF && octets[1].get_value() == 0xBB && octets[2].get_value() == 0xBF;
+}
+
+bool OctetSequence::is_word_joiner() const noexcept
+{
+    const auto length_result = get_length();
+    if (!length_result || length_result.value() != 3) { return false; }
+
+    return octets[0].get_value() == 0xE2 && octets[1].get_value() == 0x80 && octets[2].get_value() == 0x8C;
+}
+
 std::expected<std::size_t, Error> get_octet_sequence_length(const Octet& first_octet) noexcept
 {
     if (!first_octet.is_valid()) { return std::unexpected(Error::create_invalid_octet_error(first_octet)); }
@@ -97,6 +113,5 @@ std::expected<std::size_t, Error> get_octet_sequence_length(const Octet& first_o
     else if ((first_octet.get_value() & 0xF8) == 0xF0) { return 4; }
     else { std::unreachable(); }
 }
-
 
 } // namespace softloq::utf_8::octet
