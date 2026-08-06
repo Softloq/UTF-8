@@ -23,6 +23,11 @@ Error Error::create_invalid_octet_sequence_error(const OctetSequence& sequence) 
     return Error(Code::InvalidOctetSequence, "Invalid octet sequence");
 }
 
+Error Error::create_invalid_octet_sequence_length_error(std::size_t expected_length, std::size_t actual_length) noexcept
+{
+    return Error(Code::InvalidOctetSequenceLength, "Invalid octet sequence length. Expected: " + std::to_string(expected_length) + ", Actual: " + std::to_string(actual_length));
+}
+
 Error::Code Error::get_code() const noexcept { return code; }
 
 const std::string& Error::get_message() const noexcept { return message; }

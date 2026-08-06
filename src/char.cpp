@@ -8,7 +8,7 @@ std::expected<Char, Error> Char::create(const OctetSequence& sequence) noexcept
 {
     if (!sequence.is_valid()) { return std::unexpected(Error::create_invalid_octet_sequence_error(sequence)); }
 
-    const auto num_of_octets = sequence.get_length().value();
+    const auto num_of_octets = sequence.get_length();
     
     switch(num_of_octets)
     {

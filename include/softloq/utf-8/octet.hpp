@@ -12,7 +12,7 @@ class Octet final
 {
 public:
     [[nodiscard]] SOFTLOQ_UTF_8_API Octet() noexcept;
-    [[nodiscard]] SOFTLOQ_UTF_8_API explicit Octet(std::uint8_t value) noexcept;
+    [[nodiscard]] SOFTLOQ_UTF_8_API Octet(std::uint8_t value) noexcept;
 
     [[nodiscard]] SOFTLOQ_UTF_8_API operator std::uint8_t() const noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API std::uint8_t get_value() const noexcept;

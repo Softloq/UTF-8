@@ -21,7 +21,7 @@ public:
     [[nodiscard]] static SOFTLOQ_UTF_8_API std::expected<OctetSequence, Error> create(const Octet& first_octet, const Octet& second_octet, const Octet& third_octet, const Octet& fourth_octet) noexcept;
 
     [[nodiscard]] SOFTLOQ_UTF_8_API std::expected<std::reference_wrapper<const Octet>, Error> at(std::size_t index) const noexcept;
-    [[nodiscard]] SOFTLOQ_UTF_8_API std::expected<std::size_t, Error> get_length() const noexcept;
+    [[nodiscard]] SOFTLOQ_UTF_8_API std::size_t get_length() const noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API bool is_valid() const noexcept;
 
     [[nodiscard]] SOFTLOQ_UTF_8_API bool is_bom() const noexcept;
@@ -29,7 +29,8 @@ public:
 
 private:
     std::unique_ptr<Octet[]> octets;
-
+    std::size_t length;
+    
     [[nodiscard]] SOFTLOQ_UTF_8_API OctetSequence(const Octet& first_octet) noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API OctetSequence(const Octet& first_octet, const Octet& second_octet) noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API OctetSequence(const Octet& first_octet, const Octet& second_octet, const Octet& third_octet) noexcept;

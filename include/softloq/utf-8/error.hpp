@@ -19,13 +19,15 @@ public:
     {
         InvalidChar = 1,
         InvalidOctet = 2,
-        InvalidOctetSequence = 3
+        InvalidOctetSequence = 3,
+        InvalidOctetSequenceLength = 4
     };
 
     [[nodiscard]] static SOFTLOQ_UTF_8_API Error create_invalid_char_error(const Char& character) noexcept;
     [[nodiscard]] static SOFTLOQ_UTF_8_API Error create_invalid_octet_error(const Octet& octet) noexcept;
     [[nodiscard]] static SOFTLOQ_UTF_8_API Error create_invalid_octet_sequence_error(const OctetSequence& sequence) noexcept;
-    
+    [[nodiscard]] static SOFTLOQ_UTF_8_API Error create_invalid_octet_sequence_length_error(std::size_t expected_length, std::size_t actual_length) noexcept;
+
     [[nodiscard]] SOFTLOQ_UTF_8_API Code get_code() const noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API const std::string& get_message() const noexcept;
     
