@@ -21,5 +21,5 @@ cmake --build build/debug
 ## Running
 
 ```sh
-ctest --test-dir build/debug --output-on-failure
+ctest --test-dir build/debug/tests --output-on-failure
 ```
