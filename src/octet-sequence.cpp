@@ -1,7 +1,7 @@
 #include "softloq/utf-8/pch/pch.hpp"
-#include "softloq/utf-8/octet/octet-sequence.hpp"
+#include "softloq/utf-8/octet-sequence.hpp"
 
-namespace softloq::utf_8::octet
+namespace softloq::utf_8
 {
 
 std::expected<OctetSequence, Error> OctetSequence::create(const Octet& first_octet) noexcept
@@ -114,4 +114,4 @@ std::expected<std::size_t, Error> get_octet_sequence_length(const Octet& first_o
     else { std::unreachable(); }
 }
 
-} // namespace softloq::utf_8::octet
+} // namespace softloq::utf_8

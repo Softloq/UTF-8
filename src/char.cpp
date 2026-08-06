@@ -4,7 +4,7 @@
 namespace softloq::utf_8
 {
 
-std::expected<Char, Error> Char::create(const octet::OctetSequence& sequence) noexcept
+std::expected<Char, Error> Char::create(const OctetSequence& sequence) noexcept
 {
     if (!sequence.is_valid()) { return std::unexpected(Error::create_invalid_octet_sequence_error(sequence)); }
 
@@ -77,41 +77,42 @@ std::expected<Char, Error> Char::create(std::uint32_t code_point) noexcept
 Char::Char(std::uint32_t code_point) noexcept : code_point(code_point) {}
 
 std::uint32_t Char::get_code_point() const noexcept { return code_point; }
+
 Char::operator std::uint32_t() const noexcept { return get_code_point(); }
 
-std::expected<octet::OctetSequence, Error> Char::to_octet_sequence() const noexcept
+std::expected<OctetSequence, Error> Char::to_octet_sequence() const noexcept
 {
     if (!is_valid()) { return std::unexpected(Error::create_invalid_char_error(*this)); }
     
     if (code_point <= 0x7F)
     {
-        const octet::Octet first_octet(static_cast<std::uint8_t>(code_point));
+        const Octet first_octet(static_cast<std::uint8_t>(code_point));
 
-        return octet::OctetSequence::create(first_octet).value();
+        return OctetSequence::create(first_octet).value();
     }
     else if (code_point <= 0x7FF)
     {
-        const octet::Octet first_octet(static_cast<std::uint8_t>(0xC0 | ((code_point >> 6) & 0x1F)));
-        const octet::Octet second_octet(static_cast<std::uint8_t>(0x80 | (code_point & 0x3F)));
+        const Octet first_octet(static_cast<std::uint8_t>(0xC0 | ((code_point >> 6) & 0x1F)));
+        const Octet second_octet(static_cast<std::uint8_t>(0x80 | (code_point & 0x3F)));
 
-        return octet::OctetSequence::create(first_octet, second_octet).value();
+        return OctetSequence::create(first_octet, second_octet).value();
     }
     else if (code_point <= 0xFFFF)
     {
-        const octet::Octet first_octet(static_cast<std::uint8_t>(0xE0 | ((code_point >> 12) & 0x0F)));
-        const octet::Octet second_octet(static_cast<std::uint8_t>(0x80 | ((code_point >> 6) & 0x3F)));
-        const octet::Octet third_octet(static_cast<std::uint8_t>(0x80 | (code_point & 0x3F)));
+        const Octet first_octet(static_cast<std::uint8_t>(0xE0 | ((code_point >> 12) & 0x0F)));
+        const Octet second_octet(static_cast<std::uint8_t>(0x80 | ((code_point >> 6) & 0x3F)));
+        const Octet third_octet(static_cast<std::uint8_t>(0x80 | (code_point & 0x3F)));
 
-        return octet::OctetSequence::create(first_octet, second_octet, third_octet).value();
+        return OctetSequence::create(first_octet, second_octet, third_octet).value();
     }
     else if (code_point <= 0x10FFFF)
     {
-        const octet::Octet first_octet(static_cast<std::uint8_t>(0xF0 | ((code_point >> 18) & 0x07)));
-        const octet::Octet second_octet(static_cast<std::uint8_t>(0x80 | ((code_point >> 12) & 0x3F)));
-        const octet::Octet third_octet(static_cast<std::uint8_t>(0x80 | ((code_point >> 6) & 0x3F)));
-        const octet::Octet fourth_octet(static_cast<std::uint8_t>(0x80 | (code_point & 0x3F)));
+        const Octet first_octet(static_cast<std::uint8_t>(0xF0 | ((code_point >> 18) & 0x07)));
+        const Octet second_octet(static_cast<std::uint8_t>(0x80 | ((code_point >> 12) & 0x3F)));
+        const Octet third_octet(static_cast<std::uint8_t>(0x80 | ((code_point >> 6) & 0x3F)));
+        const Octet fourth_octet(static_cast<std::uint8_t>(0x80 | (code_point & 0x3F)));
 
-        return octet::OctetSequence::create(first_octet, second_octet, third_octet, fourth_octet).value();
+        return OctetSequence::create(first_octet, second_octet, third_octet, fourth_octet).value();
     }
     else { std::unreachable(); }
 }

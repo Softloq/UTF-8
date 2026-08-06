@@ -1,14 +1,17 @@
 #include "softloq/utf-8/pch/pch.hpp"
-#include "softloq/utf-8/octet/octet.hpp"
+#include "softloq/utf-8/octet.hpp"
 
-namespace softloq::utf_8::octet
+namespace softloq::utf_8
 {
 
 Octet::Octet() noexcept : value(0) {}
+
 Octet::Octet(std::uint8_t value) noexcept : value(value) {}
 
 Octet::operator std::uint8_t() const noexcept { return value; }
+
 std::uint8_t Octet::get_value() const noexcept { return value; }
+
 bool Octet::is_valid() const noexcept
 {
     switch (value)
@@ -33,4 +36,4 @@ bool Octet::is_valid() const noexcept
     std::unreachable();
 }
 
-} // namespace softloq::utf_8::octet
+} // namespace softloq::utf_8

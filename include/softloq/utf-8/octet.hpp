@@ -2,9 +2,10 @@
 #define SOFTLOQ_UTF_8_OCTET_HPP
 
 #include "softloq/utf-8/api/api.hpp"
+
 #include <cstdint>
 
-namespace softloq::utf_8::octet
+namespace softloq::utf_8
 {
 
 class Octet final
@@ -21,6 +22,6 @@ private:
     std::uint8_t value;
 };
 
-} // namespace softloq::utf_8::octet
+} // namespace softloq::utf_8
 
 #endif // SOFTLOQ_UTF_8_OCTET_HPP
