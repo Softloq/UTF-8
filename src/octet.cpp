@@ -4,16 +4,10 @@
 namespace softloq::utf_8
 {
 
-Octet::Octet() noexcept : value(0) {}
-
-Octet::Octet(std::uint8_t value) noexcept : value(value) {}
-
-Octet::operator std::uint8_t() const noexcept { return value; }
-
-std::uint8_t Octet::get_value() const noexcept { return value; }
-
-bool Octet::is_valid() const noexcept
+std::expected<Octet, Error> Octet::create(std::uint8_t value) noexcept
 {
+    Octet octet(value);
+
     switch (value)
     {
     case 0xC0:
@@ -28,12 +22,18 @@ bool Octet::is_valid() const noexcept
     case 0xFC:
     case 0xFD:
     case 0xFE:
-    case 0xFF: return false;
+    case 0xFF: return std::unexpected(Error::create_invalid_octet_error(octet));
 
-    default: return true;
+    default: return octet;
     }
 
     std::unreachable();
 }
+
+Octet::Octet(std::uint8_t value) noexcept : value(value) {}
+
+Octet::operator std::uint8_t() const noexcept { return value; }
+
+std::uint8_t Octet::get_value() const noexcept { return value; }
 
 } // namespace softloq::utf_8

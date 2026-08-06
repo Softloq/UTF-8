@@ -28,6 +28,16 @@ Error Error::create_invalid_octet_sequence_length_error(std::size_t expected_len
     return Error(Code::InvalidOctetSequenceLength, "Invalid octet sequence length. Expected: " + std::to_string(expected_length) + ", Actual: " + std::to_string(actual_length));
 }
 
+Error Error::create_invalid_octet_sequence_index_error(std::size_t index, std::size_t length) noexcept
+{
+    return Error(Code::InvalidOctetSequenceIndex, "Invalid octet sequence index. Index: " + std::to_string(index) + ", Length: " + std::to_string(length));
+}
+
+Error Error::create_encoding_empty_char_sequence_error() noexcept
+{
+    return Error(Code::EncodingEmptyCharSequence, "Cannot encode an empty character sequence");
+}
+
 Error::Code Error::get_code() const noexcept { return code; }
 
 const std::string& Error::get_message() const noexcept { return message; }

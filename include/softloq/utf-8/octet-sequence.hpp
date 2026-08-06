@@ -22,7 +22,6 @@ public:
 
     [[nodiscard]] SOFTLOQ_UTF_8_API std::expected<std::reference_wrapper<const Octet>, Error> at(std::size_t index) const noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API std::size_t get_length() const noexcept;
-    [[nodiscard]] SOFTLOQ_UTF_8_API bool is_valid() const noexcept;
 
     [[nodiscard]] SOFTLOQ_UTF_8_API bool is_bom() const noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API bool is_word_joiner() const noexcept;
@@ -38,7 +37,7 @@ private:
 
 };
 
-[[nodiscard]] SOFTLOQ_UTF_8_API std::expected<std::size_t, Error> get_octet_sequence_length(const Octet& first_octet) noexcept;
+[[nodiscard]] SOFTLOQ_UTF_8_API std::size_t get_octet_sequence_length(const Octet& first_octet) noexcept;
 
 } // namespace softloq::utf_8
 

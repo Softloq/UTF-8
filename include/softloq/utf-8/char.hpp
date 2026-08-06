@@ -19,9 +19,7 @@ public:
     [[nodiscard]] SOFTLOQ_UTF_8_API std::uint32_t get_code_point() const noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API operator std::uint32_t() const noexcept;
 
-    [[nodiscard]] SOFTLOQ_UTF_8_API std::expected<OctetSequence, Error> to_octet_sequence() const noexcept;
-
-    [[nodiscard]] SOFTLOQ_UTF_8_API bool is_valid() const noexcept;
+    [[nodiscard]] SOFTLOQ_UTF_8_API OctetSequence to_octet_sequence() const noexcept;
 
     [[nodiscard]] SOFTLOQ_UTF_8_API bool is_bom() const noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API bool is_word_joiner() const noexcept;

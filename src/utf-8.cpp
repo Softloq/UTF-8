@@ -4,44 +4,69 @@
 namespace softloq::utf_8
 {
 
-std::expected<Char, Error> decode(const OctetSequence& sequence) noexcept
+Char decode(const OctetSequence& sequence) noexcept
 {
-    return Char::create(sequence);
+    return Char::create(sequence).value();
 }
 
 std::expected<Char, Error> decode(const std::string_view& sequence_view) noexcept
 {
     const auto length = sequence_view.length();
-    if (length == 0) { return std::unexpected(Error::create_invalid_octet_sequence_error(OctetSequence::create(Octet(0)).value())); }
+    if (length == 0) { return std::unexpected(Error::create_encoding_empty_char_sequence_error()); }
     
-    const auto octet_sequence_length_result = get_octet_sequence_length(static_cast<std::uint8_t>(sequence_view[0]));
-    if (!octet_sequence_length_result) { return std::unexpected(octet_sequence_length_result.error()); }
+    const auto first_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_view[0]));
+    if (!first_octet_result) { return std::unexpected(first_octet_result.error()); }    
+    const auto first_octet = first_octet_result.value();
 
-    const auto octet_sequence_length = octet_sequence_length_result.value();
+    const auto octet_sequence_length = get_octet_sequence_length(first_octet);
+    if (length < octet_sequence_length) { return std::unexpected(Error::create_invalid_octet_sequence_length_error(octet_sequence_length, length)); }
 
-    switch (octet_sequence_length)
+    switch (get_octet_sequence_length(first_octet))
     {
     case 1:
     {
-        const auto octet_sequence_result = OctetSequence::create(static_cast<std::uint8_t>(sequence_view[0]));
-        if (!octet_sequence_result) { return std::unexpected(octet_sequence_result.error()); }
+        const auto octet_sequence_result = OctetSequence::create(first_octet);
         return decode(octet_sequence_result.value());
     }
     case 2:
     {
-        const auto octet_sequence_result = OctetSequence::create(static_cast<std::uint8_t>(sequence_view[0]), static_cast<std::uint8_t>(sequence_view[1]));
+        const auto second_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_view[1]));
+        if (!second_octet_result) { return std::unexpected(second_octet_result.error()); }
+        const auto second_octet = second_octet_result.value();
+
+        const auto octet_sequence_result = OctetSequence::create(first_octet, second_octet);
         if (!octet_sequence_result) { return std::unexpected(octet_sequence_result.error()); }
         return decode(octet_sequence_result.value());
     }
     case 3:
     {
-        const auto octet_sequence_result = OctetSequence::create(static_cast<std::uint8_t>(sequence_view[0]), static_cast<std::uint8_t>(sequence_view[1]), static_cast<std::uint8_t>(sequence_view[2]));
+        const auto second_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_view[1]));
+        if (!second_octet_result) { return std::unexpected(second_octet_result.error()); }
+        const auto second_octet = second_octet_result.value();
+
+        const auto third_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_view[2]));
+        if (!third_octet_result) { return std::unexpected(third_octet_result.error()); }
+        const auto third_octet = third_octet_result.value();
+
+        const auto octet_sequence_result = OctetSequence::create(first_octet, second_octet, third_octet);
         if (!octet_sequence_result) { return std::unexpected(octet_sequence_result.error()); }
         return decode(octet_sequence_result.value());
     }
     case 4:
     {
-        const auto octet_sequence_result = OctetSequence::create(static_cast<std::uint8_t>(sequence_view[0]), static_cast<std::uint8_t>(sequence_view[1]), static_cast<std::uint8_t>(sequence_view[2]), static_cast<std::uint8_t>(sequence_view[3]));
+        const auto second_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_view[1]));
+        if (!second_octet_result) { return std::unexpected(second_octet_result.error()); }
+        const auto second_octet = second_octet_result.value();
+
+        const auto third_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_view[2]));
+        if (!third_octet_result) { return std::unexpected(third_octet_result.error()); }
+        const auto third_octet = third_octet_result.value();
+
+        const auto fourth_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_view[3]));
+        if (!fourth_octet_result) { return std::unexpected(fourth_octet_result.error()); }
+        const auto fourth_octet = fourth_octet_result.value();
+
+        const auto octet_sequence_result = OctetSequence::create(first_octet, second_octet, third_octet, fourth_octet);
         if (!octet_sequence_result) { return std::unexpected(octet_sequence_result.error()); }
         return decode(octet_sequence_result.value());
     }
@@ -61,34 +86,61 @@ std::expected<Char, Error> decode(const char* sequence_str) noexcept
         if (length == 4) { break; }
     }
 
-    const auto octet_sequence_length_result = get_octet_sequence_length(static_cast<std::uint8_t>(sequence_str[0]));
-    if (!octet_sequence_length_result) { return std::unexpected(octet_sequence_length_result.error()); }
+    if (length == 0) { return std::unexpected(Error::create_encoding_empty_char_sequence_error()); }
+    
+    const auto first_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_str[0]));
+    if (!first_octet_result) { return std::unexpected(first_octet_result.error()); }    
+    const auto first_octet = first_octet_result.value();
 
-    const auto octet_sequence_length = octet_sequence_length_result.value();
+    const auto octet_sequence_length = get_octet_sequence_length(first_octet);
+    if (length < octet_sequence_length) { return std::unexpected(Error::create_invalid_octet_sequence_length_error(octet_sequence_length, length)); }
 
-    switch (octet_sequence_length)
+    switch (get_octet_sequence_length(first_octet))
     {
     case 1:
     {
-        const auto octet_sequence_result = OctetSequence::create(static_cast<std::uint8_t>(sequence_str[0]));
-        if (!octet_sequence_result) { return std::unexpected(octet_sequence_result.error()); }
+        const auto octet_sequence_result = OctetSequence::create(first_octet);
         return decode(octet_sequence_result.value());
     }
     case 2:
     {
-        const auto octet_sequence_result = OctetSequence::create(static_cast<std::uint8_t>(sequence_str[0]), static_cast<std::uint8_t>(sequence_str[1]));
+        const auto second_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_str[1]));
+        if (!second_octet_result) { return std::unexpected(second_octet_result.error()); }
+        const auto second_octet = second_octet_result.value();
+
+        const auto octet_sequence_result = OctetSequence::create(first_octet, second_octet);
         if (!octet_sequence_result) { return std::unexpected(octet_sequence_result.error()); }
         return decode(octet_sequence_result.value());
     }
     case 3:
     {
-        const auto octet_sequence_result = OctetSequence::create(static_cast<std::uint8_t>(sequence_str[0]), static_cast<std::uint8_t>(sequence_str[1]), static_cast<std::uint8_t>(sequence_str[2]));
+        const auto second_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_str[1]));
+        if (!second_octet_result) { return std::unexpected(second_octet_result.error()); }
+        const auto second_octet = second_octet_result.value();
+
+        const auto third_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_str[2]));
+        if (!third_octet_result) { return std::unexpected(third_octet_result.error()); }
+        const auto third_octet = third_octet_result.value();
+
+        const auto octet_sequence_result = OctetSequence::create(first_octet, second_octet, third_octet);
         if (!octet_sequence_result) { return std::unexpected(octet_sequence_result.error()); }
         return decode(octet_sequence_result.value());
     }
     case 4:
     {
-        const auto octet_sequence_result = OctetSequence::create(static_cast<std::uint8_t>(sequence_str[0]), static_cast<std::uint8_t>(sequence_str[1]), static_cast<std::uint8_t>(sequence_str[2]), static_cast<std::uint8_t>(sequence_str[3]));
+        const auto second_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_str[1]));
+        if (!second_octet_result) { return std::unexpected(second_octet_result.error()); }
+        const auto second_octet = second_octet_result.value();
+
+        const auto third_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_str[2]));
+        if (!third_octet_result) { return std::unexpected(third_octet_result.error()); }
+        const auto third_octet = third_octet_result.value();
+
+        const auto fourth_octet_result = Octet::create(static_cast<std::uint8_t>(sequence_str[3]));
+        if (!fourth_octet_result) { return std::unexpected(fourth_octet_result.error()); }
+        const auto fourth_octet = fourth_octet_result.value();
+
+        const auto octet_sequence_result = OctetSequence::create(first_octet, second_octet, third_octet, fourth_octet);
         if (!octet_sequence_result) { return std::unexpected(octet_sequence_result.error()); }
         return decode(octet_sequence_result.value());
     }
@@ -98,7 +150,7 @@ std::expected<Char, Error> decode(const char* sequence_str) noexcept
     std::unreachable();
 }
 
-std::expected<OctetSequence, Error> encode(const Char& character) noexcept
+OctetSequence encode(const Char& character) noexcept
 {
     return character.to_octet_sequence();
 }
