@@ -7,6 +7,8 @@
 
 Softloq UTF-8 is released under the [MIT License](LICENSE) — a permissive open-source license. You're free to use, modify, and redistribute this project, including in commercial and proprietary software, as long as the original copyright notice is preserved.
 
+The current version is **v1.0.0** — see its [changelog](changelogs/v1.0.0/CHANGELOG.md) for what it includes.
+
 [Jump to Build Options](#build-options)
 
 ## Contributing
