@@ -1,3 +1,12 @@
+/**
+ * @file utf-8.cpp
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Implements the top-level decode()/encode() facade declared in softloq/utf-8/utf-8.hpp.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Implements convenience functions for converting between raw UTF-8 bytes and validated code points.
+ */
+
 #include "softloq/utf-8/pch/pch.hpp"
 #include "softloq/utf-8/utf-8.hpp"
 

@@ -1,3 +1,12 @@
+/**
+ * @file softloq/utf-8/api/api.hpp
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Defines the SOFTLOQ_UTF_8_API export/import macro.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Private implementation detail: resolves the API macro to the correct export, import, or static behavior.
+ */
+
 #ifndef SOFTLOQ_UTF_8_API_HPP
 #define SOFTLOQ_UTF_8_API_HPP
 

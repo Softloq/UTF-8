@@ -6,3 +6,10 @@
 .specs/
 
 build/
+bin/
+tmp/
+temp/
+
+.vscode/
+
+docs/html/

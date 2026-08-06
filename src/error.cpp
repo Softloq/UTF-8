@@ -1,3 +1,12 @@
+/**
+ * @file error.cpp
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Implements the Error type declared in softloq/utf-8/error.hpp.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Implements the failure factory functions and accessors used by the library's std::expected results.
+ */
+
 #include "softloq/utf-8/pch/pch.hpp"
 #include "softloq/utf-8/error.hpp"
 #include "softloq/utf-8/char.hpp"

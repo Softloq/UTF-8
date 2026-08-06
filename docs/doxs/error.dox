@@ -1,0 +1,76 @@
+/**
+ * @file error.dox
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Public API documentation for softloq::utf_8::Error.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Documents the Error type used to represent recoverable UTF-8 processing failures.
+ */
+
+/**
+ * @class softloq::utf_8::Error
+ * @brief A recoverable failure produced while validating or processing UTF-8 data.
+ *
+ * Instances are returned inside `std::expected` from the library's fallible
+ * operations; they are never thrown as exceptions.
+ */
+
+/**
+ * @enum softloq::utf_8::Error::Code
+ * @brief Stable identifiers for each category of failure the library can report.
+ */
+
+/**
+ * @fn Error softloq::utf_8::Error::create_invalid_char_error(const Char& character)
+ * @brief Builds an error describing an out-of-range or surrogate code point.
+ * @param character The invalid Char.
+ * @return The constructed Error.
+ */
+
+/**
+ * @fn Error softloq::utf_8::Error::create_invalid_octet_error(const Octet& octet)
+ * @brief Builds an error describing a byte value that is never legal in UTF-8.
+ * @param octet The invalid Octet.
+ * @return The constructed Error.
+ */
+
+/**
+ * @fn Error softloq::utf_8::Error::create_invalid_octet_sequence_error(const OctetSequence& sequence)
+ * @brief Builds an error describing a malformed octet sequence.
+ * @param sequence The invalid OctetSequence.
+ * @return The constructed Error.
+ */
+
+/**
+ * @fn Error softloq::utf_8::Error::create_invalid_octet_sequence_length_error(std::size_t expected_length, std::size_t actual_length)
+ * @brief Builds an error describing a mismatch between an expected and actual sequence length.
+ * @param expected_length The sequence length required by the lead octet.
+ * @param actual_length The sequence length actually provided.
+ * @return The constructed Error.
+ */
+
+/**
+ * @fn Error softloq::utf_8::Error::create_invalid_octet_sequence_index_error(std::size_t index, std::size_t length)
+ * @brief Builds an error describing an out-of-bounds access into an octet sequence.
+ * @param index The requested index.
+ * @param length The sequence's actual length.
+ * @return The constructed Error.
+ */
+
+/**
+ * @fn Error softloq::utf_8::Error::create_encoding_empty_char_sequence_error()
+ * @brief Builds an error describing an attempt to decode an empty byte sequence.
+ * @return The constructed Error.
+ */
+
+/**
+ * @fn Error::Code softloq::utf_8::Error::get_code() const
+ * @brief Returns the stable category identifying this failure.
+ * @return The error's Code.
+ */
+
+/**
+ * @fn const std::string& softloq::utf_8::Error::get_message() const
+ * @brief Returns a concise, human-readable description of the failure.
+ * @return The error's message.
+ */

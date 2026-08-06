@@ -1,0 +1,67 @@
+/**
+ * @file char.dox
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Public API documentation for softloq::utf_8::Char.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Documents the Char type, which represents a single validated Unicode code point.
+ */
+
+/**
+ * @class softloq::utf_8::Char
+ * @brief A single Unicode code point, validated against the surrogate range and the maximum code point.
+ *
+ * A Char can be constructed either directly from a code point or by decoding
+ * an OctetSequence, and can be converted back into an OctetSequence.
+ */
+
+/**
+ * @fn std::expected<Char, Error> softloq::utf_8::Char::create(const OctetSequence& sequence)
+ * @brief Decodes a validated octet sequence into its represented code point.
+ * @param sequence The octet sequence to decode.
+ * @return The decoded Char, or an Error if the resulting code point is invalid.
+ */
+
+/**
+ * @fn std::expected<Char, Error> softloq::utf_8::Char::create(std::uint32_t code_point)
+ * @brief Validates and constructs a Char directly from a code point.
+ * @param code_point The candidate Unicode code point.
+ * @return The validated Char, or an Error if the code point is a surrogate or exceeds U+10FFFF.
+ */
+
+/**
+ * @fn std::uint32_t softloq::utf_8::Char::get_code_point() const
+ * @brief Returns the underlying Unicode code point.
+ * @return The code point value.
+ */
+
+/**
+ * @fn softloq::utf_8::Char::operator std::uint32_t() const
+ * @brief Implicitly converts the Char back to its raw code point.
+ * @return The code point value.
+ */
+
+/**
+ * @fn OctetSequence softloq::utf_8::Char::to_octet_sequence() const
+ * @brief Encodes the code point into its 1-4 octet UTF-8 representation.
+ * @return The encoded OctetSequence.
+ */
+
+/**
+ * @fn bool softloq::utf_8::Char::is_bom() const
+ * @brief Reports whether the code point is the byte order mark (U+FEFF).
+ * @return `true` if this Char is the byte order mark.
+ */
+
+/**
+ * @fn bool softloq::utf_8::Char::is_word_joiner() const
+ * @brief Reports whether the code point is the Unicode word joiner (U+2060).
+ * @return `true` if this Char is the word joiner.
+ */
+
+/**
+ * @fn std::strong_ordering softloq::utf_8::Char::operator<=>(const Char& other) const
+ * @brief Compares two characters by their code point.
+ * @param other The character to compare against.
+ * @return The strong ordering between the two code points.
+ */

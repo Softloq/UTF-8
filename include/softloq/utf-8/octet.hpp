@@ -1,3 +1,12 @@
+/**
+ * @file softloq/utf-8/octet.hpp
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Declares the Octet type representing a single validated UTF-8 byte.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Declares construction, value access, and comparison of a single validated UTF-8 byte.
+ */
+
 #ifndef SOFTLOQ_UTF_8_OCTET_HPP
 #define SOFTLOQ_UTF_8_OCTET_HPP
 
@@ -6,6 +15,7 @@
 
 #include <cstdint>
 #include <compare>
+#include <expected>
 
 namespace softloq::utf_8
 {

@@ -1,0 +1,43 @@
+/**
+ * @file utf-8.dox
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Public API documentation for the softloq::utf_8 decode/encode facade.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Documents the top-level decode() and encode() convenience functions.
+ */
+
+/**
+ * @fn Char softloq::utf_8::decode(const OctetSequence& sequence)
+ * @brief Decodes an already-validated octet sequence into a Char.
+ * @param sequence The octet sequence to decode.
+ * @return The decoded Char.
+ */
+
+/**
+ * @fn std::expected<Char, Error> softloq::utf_8::decode(const std::string_view& sequence_view)
+ * @brief Decodes the leading UTF-8 character from a string view.
+ * @param sequence_view The byte view to decode from.
+ * @return The decoded Char, or an Error if the leading bytes are not a valid UTF-8 sequence.
+ */
+
+/**
+ * @fn std::expected<Char, Error> softloq::utf_8::decode(const char* sequence_str)
+ * @brief Decodes the leading UTF-8 character from a null-terminated byte string.
+ * @param sequence_str The null-terminated byte string to decode from.
+ * @return The decoded Char, or an Error if the leading bytes are not a valid UTF-8 sequence.
+ */
+
+/**
+ * @fn OctetSequence softloq::utf_8::encode(const Char& character)
+ * @brief Encodes an already-validated Char into its UTF-8 octet sequence.
+ * @param character The character to encode.
+ * @return The encoded OctetSequence.
+ */
+
+/**
+ * @fn std::expected<OctetSequence, Error> softloq::utf_8::encode(std::uint32_t code_point)
+ * @brief Validates a raw code point and encodes it into a UTF-8 octet sequence.
+ * @param code_point The candidate Unicode code point.
+ * @return The encoded OctetSequence, or an Error if the code point is invalid.
+ */

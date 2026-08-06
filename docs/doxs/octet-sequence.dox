@@ -1,0 +1,89 @@
+/**
+ * @file octet-sequence.dox
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Public API documentation for softloq::utf_8::OctetSequence.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Documents the OctetSequence type, which groups the 1-4 octets that together encode one code point.
+ */
+
+/**
+ * @class softloq::utf_8::OctetSequence
+ * @brief The 1 to 4 validated octets that together encode a single Unicode code point.
+ *
+ * A sequence's octet count is determined by its lead octet; each `create()`
+ * overload rejects octets whose count does not match the number of arguments provided.
+ */
+
+/**
+ * @fn std::expected<OctetSequence, Error> softloq::utf_8::OctetSequence::create(const Octet& first_octet)
+ * @brief Constructs a 1-octet sequence (ASCII code point).
+ * @param first_octet The lead octet.
+ * @return The validated sequence, or an Error if the lead octet does not indicate a 1-octet sequence.
+ */
+
+/**
+ * @fn std::expected<OctetSequence, Error> softloq::utf_8::OctetSequence::create(const Octet& first_octet, const Octet& second_octet)
+ * @brief Constructs a 2-octet sequence.
+ * @param first_octet The lead octet.
+ * @param second_octet The trailing continuation octet.
+ * @return The validated sequence, or an Error if the lead octet does not indicate a 2-octet sequence.
+ */
+
+/**
+ * @fn std::expected<OctetSequence, Error> softloq::utf_8::OctetSequence::create(const Octet& first_octet, const Octet& second_octet, const Octet& third_octet)
+ * @brief Constructs a 3-octet sequence.
+ * @param first_octet The lead octet.
+ * @param second_octet The first trailing continuation octet.
+ * @param third_octet The second trailing continuation octet.
+ * @return The validated sequence, or an Error if the lead octet does not indicate a 3-octet sequence.
+ */
+
+/**
+ * @fn std::expected<OctetSequence, Error> softloq::utf_8::OctetSequence::create(const Octet& first_octet, const Octet& second_octet, const Octet& third_octet, const Octet& fourth_octet)
+ * @brief Constructs a 4-octet sequence.
+ * @param first_octet The lead octet.
+ * @param second_octet The first trailing continuation octet.
+ * @param third_octet The second trailing continuation octet.
+ * @param fourth_octet The third trailing continuation octet.
+ * @return The validated sequence, or an Error if the lead octet does not indicate a 4-octet sequence.
+ */
+
+/**
+ * @fn std::expected<std::reference_wrapper<const Octet>, Error> softloq::utf_8::OctetSequence::at(std::size_t index) const
+ * @brief Accesses the octet at the given position within the sequence.
+ * @param index The zero-based position to access.
+ * @return A reference to the octet, or an Error if the index is out of bounds.
+ */
+
+/**
+ * @fn std::size_t softloq::utf_8::OctetSequence::get_length() const
+ * @brief Returns the number of octets in the sequence (1-4).
+ * @return The octet count.
+ */
+
+/**
+ * @fn bool softloq::utf_8::OctetSequence::is_bom() const
+ * @brief Reports whether the sequence encodes the UTF-8 byte order mark (U+FEFF).
+ * @return `true` if the sequence is the byte order mark.
+ */
+
+/**
+ * @fn bool softloq::utf_8::OctetSequence::is_word_joiner() const
+ * @brief Reports whether the sequence encodes the project's recognized word-joining control character.
+ * @return `true` if the sequence matches that control character's encoding.
+ */
+
+/**
+ * @fn std::strong_ordering softloq::utf_8::OctetSequence::operator<=>(const OctetSequence& other) const
+ * @brief Compares two sequences, first by length and then octet-by-octet.
+ * @param other The sequence to compare against.
+ * @return The strong ordering between the two sequences.
+ */
+
+/**
+ * @fn std::size_t softloq::utf_8::get_octet_sequence_length(const Octet& first_octet)
+ * @brief Determines how many octets a sequence must have, given its lead octet.
+ * @param first_octet The candidate lead octet.
+ * @return The required sequence length (1-4) encoded by the lead octet's high bits.
+ */

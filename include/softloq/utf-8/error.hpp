@@ -1,3 +1,12 @@
+/**
+ * @file softloq/utf-8/error.hpp
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Declares the Error type representing a recoverable UTF-8 processing failure.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Declares the failure categories and accessors used by the library's std::expected results.
+ */
+
 #ifndef SOFTLOQ_UTF_8_ERROR_HPP
 #define SOFTLOQ_UTF_8_ERROR_HPP
 

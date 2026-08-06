@@ -1,3 +1,12 @@
+/**
+ * @file char.cpp
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Implements the Char type declared in softloq/utf-8/char.hpp.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Implements construction, encoding, and comparison of a single validated Unicode code point.
+ */
+
 #include "softloq/utf-8/pch/pch.hpp"
 #include "softloq/utf-8/char.hpp"
 

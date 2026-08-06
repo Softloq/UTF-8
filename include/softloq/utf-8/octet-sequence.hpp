@@ -1,3 +1,12 @@
+/**
+ * @file softloq/utf-8/octet-sequence.hpp
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Declares the OctetSequence type grouping the octets that encode one code point.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Declares construction, indexing, and comparison of a 1-4 octet UTF-8 sequence.
+ */
+
 #ifndef SOFTLOQ_UTF_8_OCTET_SEQUENCE_HPP
 #define SOFTLOQ_UTF_8_OCTET_SEQUENCE_HPP
 

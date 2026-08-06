@@ -1,3 +1,12 @@
+/**
+ * @file softloq/utf-8/char.hpp
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Declares the Char type representing a validated Unicode code point.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Declares construction, encoding, and comparison of a single validated Unicode code point.
+ */
+
 #ifndef SOFTLOQ_UTF_8_CHAR_HPP
 #define SOFTLOQ_UTF_8_CHAR_HPP
 
@@ -7,6 +16,7 @@
 
 #include <cstdint>
 #include <compare>
+#include <expected>
 
 namespace softloq::utf_8
 {

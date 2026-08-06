@@ -1,0 +1,48 @@
+/**
+ * @file octet.dox
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Public API documentation for softloq::utf_8::Octet.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Documents the Octet type, which represents a single validated UTF-8 byte.
+ */
+
+/**
+ * @namespace softloq::utf_8
+ * @brief Core types and functions for encoding and decoding UTF-8.
+ */
+
+/**
+ * @class softloq::utf_8::Octet
+ * @brief A single byte that has been validated as a legal UTF-8 octet value.
+ *
+ * An Octet rejects byte values that can never legally appear in a well-formed
+ * UTF-8 byte stream, such as overlong two-octet lead bytes (`0xC0`, `0xC1`) and
+ * lead bytes beyond the maximum Unicode code point (`0xF5`\-`0xFF`).
+ */
+
+/**
+ * @fn std::expected<Octet, Error> softloq::utf_8::Octet::create(std::uint8_t value)
+ * @brief Validates and constructs an Octet from a raw byte value.
+ * @param value The raw byte to validate.
+ * @return The validated Octet, or an Error describing why the value is not a legal UTF-8 octet.
+ */
+
+/**
+ * @fn softloq::utf_8::Octet::operator std::uint8_t() const
+ * @brief Implicitly converts the Octet back to its raw byte value.
+ * @return The raw byte value.
+ */
+
+/**
+ * @fn std::uint8_t softloq::utf_8::Octet::get_value() const
+ * @brief Returns the underlying validated byte value.
+ * @return The raw byte value.
+ */
+
+/**
+ * @fn std::strong_ordering softloq::utf_8::Octet::operator<=>(const Octet& other) const
+ * @brief Compares two octets by their underlying byte value.
+ * @param other The octet to compare against.
+ * @return The strong ordering between the two byte values.
+ */

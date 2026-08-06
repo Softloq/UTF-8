@@ -1,3 +1,12 @@
+/**
+ * @file octet-sequence.cpp
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Implements the OctetSequence type declared in softloq/utf-8/octet-sequence.hpp.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Implements construction, indexing, and comparison of a 1-4 octet UTF-8 sequence.
+ */
+
 #include "softloq/utf-8/pch/pch.hpp"
 #include "softloq/utf-8/octet-sequence.hpp"
 

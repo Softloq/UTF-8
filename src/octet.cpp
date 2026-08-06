@@ -1,3 +1,12 @@
+/**
+ * @file octet.cpp
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Implements the Octet type declared in softloq/utf-8/octet.hpp.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Implements construction, value access, and comparison of a single validated UTF-8 byte.
+ */
+
 #include "softloq/utf-8/pch/pch.hpp"
 #include "softloq/utf-8/octet.hpp"
 
