@@ -83,6 +83,19 @@ bool OctetSequence::is_word_joiner() const noexcept
     return octets[0].get_value() == 0xE2 && octets[1].get_value() == 0x80 && octets[2].get_value() == 0x8C;
 }
 
+std::strong_ordering OctetSequence::operator<=>(const OctetSequence& other) const noexcept
+{
+    if (length != other.length) { return length <=> other.length; }
+
+    for (std::size_t i = 0; i < length; ++i)
+    {
+        const auto comparison = octets[i] <=> other.octets[i];
+        if (comparison != std::strong_ordering::equal) { return comparison; }
+    }
+
+    return std::strong_ordering::equal;
+}
+
 std::size_t get_octet_sequence_length(const Octet& first_octet) noexcept
 {
     if ((first_octet.get_value() & 0x80) == 0x00) { return 1; }

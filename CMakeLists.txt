@@ -24,8 +24,6 @@ target_precompile_headers(softloq-utf-8 PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/inc
 # Tests
 # ==============================================================================
 if(SOFTLOQ_UTF_8_BUILD_TESTING)
-    include(CTest)
-    enable_testing()
     add_subdirectory(tests)
 endif()
 
@@ -40,15 +38,5 @@ endif()
 # Documentation
 # ==============================================================================
 if(SOFTLOQ_UTF_8_BUILD_DOCS)
-    find_package(Doxygen REQUIRED)
-
-    set(DOXYGEN_GENERATE_HTML YES)
-    set(DOXYGEN_GENERATE_LATEX NO)
-endif()
-
-# ==============================================================================
-# Benchmarks
-# ==============================================================================
-if(SOFTLOQ_UTF_8_BUILD_BENCHMARKS)
-    add_subdirectory(benchmarks)
+    add_subdirectory(docs)
 endif()

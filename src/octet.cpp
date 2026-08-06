@@ -36,4 +36,9 @@ Octet::operator std::uint8_t() const noexcept { return value; }
 
 std::uint8_t Octet::get_value() const noexcept { return value; }
 
+std::strong_ordering Octet::operator<=>(const Octet& other) const noexcept
+{
+    return value <=> other.value;
+}
+
 } // namespace softloq::utf_8

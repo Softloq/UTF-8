@@ -5,6 +5,7 @@
 #include "softloq/utf-8/error.hpp"
 
 #include <cstdint>
+#include <compare>
 
 namespace softloq::utf_8
 {
@@ -16,6 +17,8 @@ public:
 
     [[nodiscard]] SOFTLOQ_UTF_8_API operator std::uint8_t() const noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API std::uint8_t get_value() const noexcept;
+
+    [[nodiscard]] SOFTLOQ_UTF_8_API std::strong_ordering operator<=>(const Octet& other) const noexcept;
 
 private:
     std::uint8_t value;

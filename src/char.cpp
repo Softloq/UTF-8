@@ -118,4 +118,9 @@ bool Char::is_bom() const noexcept { return code_point == 0xFEFF; }
 
 bool Char::is_word_joiner() const noexcept { return code_point == 0x2060; }
 
+std::strong_ordering Char::operator<=>(const Char& other) const noexcept
+{
+    return code_point <=> other.code_point;
+}
+
 } // namespace softloq::utf_8

@@ -6,6 +6,7 @@
 #include "softloq/utf-8/error.hpp"
 
 #include <cstdint>
+#include <compare>
 
 namespace softloq::utf_8
 {
@@ -23,6 +24,8 @@ public:
 
     [[nodiscard]] SOFTLOQ_UTF_8_API bool is_bom() const noexcept;
     [[nodiscard]] SOFTLOQ_UTF_8_API bool is_word_joiner() const noexcept;
+
+    [[nodiscard]] SOFTLOQ_UTF_8_API std::strong_ordering operator<=>(const Char& other) const noexcept;
 
 private:
     std::uint32_t code_point;
