@@ -1,0 +1,44 @@
+/**
+ * @file usage.dox
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Usage guide page discussing how to consume Softloq UTF-8 effectively.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Independent Doxygen page linked from the Project Overview's main page.
+ */
+
+/**
+ * @page usage_page Using Softloq UTF-8
+ *
+ * @section usage_consuming Consuming the Library
+ * Add this repository as a subdirectory of your own CMake project and link against the
+ * `Softloq::UTF-8` target:
+ *
+ * @code{.cmake}
+ * add_subdirectory(path/to/softloq-utf-8)
+ * target_link_libraries(consumer PRIVATE Softloq::UTF-8)
+ * @endcode
+ *
+ * @code{.cpp}
+ * #include "softloq/utf-8/utf-8.hpp"
+ * @endcode
+ *
+ * If you consume the default shared build (i.e. `SOFTLOQ_UTF_8_BUILD_STATIC` is `OFF`), define
+ * `SOFTLOQ_UTF_8_IMPORTS` when compiling your own sources against the library's headers:
+ *
+ * @code{.cmake}
+ * target_compile_definitions(consumer PRIVATE SOFTLOQ_UTF_8_IMPORTS)
+ * @endcode
+ *
+ * @section usage_workflow Typical Workflow
+ * Decode raw UTF-8 bytes into a validated softloq::utf_8::Char, or encode a validated Char back into
+ * bytes, through the softloq::utf_8::decode() and softloq::utf_8::encode() facade functions. Every
+ * fallible step returns `std::expected<Value, softloq::utf_8::Error>`, so malformed input is handled
+ * explicitly rather than thrown as an exception.
+ *
+ * @section usage_examples Examples & Tests
+ * See the [examples/](https://github.com/Softloq/UTF-8/tree/main/examples) directory for runnable
+ * programs demonstrating the public API, and the
+ * [tests/](https://github.com/Softloq/UTF-8/tree/main/tests) directory for the GoogleTest suite
+ * covering `Octet`, `OctetSequence`, `Char`, and the `decode()`/`encode()` facade.
+ */

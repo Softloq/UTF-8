@@ -1,0 +1,42 @@
+/**
+ * @file project-overview.dox
+ * @author Brandon Foster (https://github.com/BrandonFoster)
+ * @brief Project Overview main page for the Softloq UTF-8 documentation.
+ *
+ * Copyright (c) Softloq. All rights reserved.
+ * Serves as Doxygen's \@mainpage, introducing the project ahead of its API reference.
+ */
+
+/**
+ * @mainpage Softloq UTF-8
+ *
+ * @section overview_developer Developer
+ * Developed by Brandon Foster ([\@BrandonFoster](https://github.com/BrandonFoster)) under the
+ * [Softloq](https://github.com/Softloq) organization.
+ *
+ * @section overview_version Version
+ * This documentation covers **v1.0.0** of Softloq UTF-8.
+ *
+ * @section overview_problem The Problem
+ * UTF-8's variable-length encoding means a "byte" and a "character" are not the same thing. A naive
+ * implementation that reads bytes without validating them can silently accept malformed input —
+ * overlong encodings, unpaired surrogates, truncated sequences, and out-of-range code points — any
+ * of which can corrupt data or introduce security issues if the unvalidated bytes are trusted.
+ *
+ * @section overview_solution The Solution
+ * Softloq UTF-8 addresses this by splitting decoding and encoding into small, independently-validated
+ * layers instead of one large decoding routine:
+ *
+ * - `Octet` rejects byte values that can never legally appear in UTF-8 the moment they're constructed.
+ * - `OctetSequence` rejects a lead octet paired with the wrong number of trailing octets before those
+ *   bytes are ever interpreted as a code point.
+ * - `Char` rejects code points outside the Unicode range or inside the UTF-16 surrogate range, whether
+ *   they arrive as a raw code point or as a decoded octet sequence.
+ *
+ * Because every layer returns `std::expected<Value, Error>` instead of throwing or silently clamping
+ * invalid input, callers are forced to explicitly handle malformed data at the point where it's
+ * detected, rather than letting corrupted text propagate further into a program.
+ *
+ * @section overview_pages Further Reading
+ * - @subpage usage_page
+ */
