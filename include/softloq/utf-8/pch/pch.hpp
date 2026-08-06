@@ -6,5 +6,6 @@
 #include <utility>
 #include <cstdint>
 #include <string>
+#include <memory>
 
 #endif // SOFTLOQ_UTF_8_PCH_HPP
