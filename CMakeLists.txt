@@ -33,7 +33,7 @@ if(SOFTLOQ_UTF_8_BUILD_STATIC)
     target_compile_definitions(softloq-utf-8 PUBLIC SOFTLOQ_UTF_8_STATIC)
 else()
     target_compile_definitions(softloq-utf-8 PRIVATE SOFTLOQ_UTF_8_EXPORTS)
-    target_compile_definitions(softloq-utf-8 INTERFACE_COMPILE_OPTIONS SOFTLOQ_UTF_8_IMPORTS)
+    target_compile_definitions(softloq-utf-8 INTERFACE SOFTLOQ_UTF_8_IMPORTS)
     set_target_properties(softloq-utf-8 PROPERTIES
         CXX_VISIBILITY_PRESET hidden
         VISIBILITY_INLINES_HIDDEN ON
